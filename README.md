@@ -1,6 +1,6 @@
 # `@mkt/rehooks`
 
-> 用于增强原生的react hook或者用于shopee mkt复用
+> 用于增强原生的react hook或者复用一些日常使用的hooks
 
 ## Install
 

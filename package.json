@@ -1,0 +1,55 @@
+{
+  "name": "rehooks",
+  "version": "0.0.1",
+  "description": "React hook",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:types": "tsc --emitDeclarationOnly",
+    "docs": "typedoc --out docs src && touch docs/.nojekyll",
+    "test": "jest --verbose",
+    "example": "npm run build && parcel example/example.html"
+  },
+  "author": "weiji.li",
+  "contributors": [
+    "weiji.li"
+  ],
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "useState",
+    "useCookie",
+    "useAction",
+    "usePrevious"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "lodash": "*"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@testing-library/react": "^8.0.1",
+    "@types/jest": "^24.0.25",
+    "@types/react": "^16.8.19",
+    "babel-jest": "^24.8.0",
+    "browser-env": "^3.2.6",
+    "jest": "^24.8.0",
+    "parcel": "^1.12.3",
+    "react-hooks-testing-library": "^0.5.1",
+    "react-test-renderer": "^16.8.6",
+    "ts-jest": "^24.0.2",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.5.1"
+  }
+}

@@ -1,17 +1,17 @@
 {
-  "name": "rehooks",
-  "version": "0.0.1",
-  "description": "React hook",
+  "name": "@mkt/rehooks",
+  "version": "0.0.2-beta",
+  "description": "React hook shopee",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "build:types": "tsc --emitDeclarationOnly",
-    "docs": "typedoc --out docs src && touch docs/.nojekyll",
+    "docs": "typedoc && touch docs/.nojekyll",
     "test": "jest --verbose",
     "example": "npm run build && parcel example/example.html"
   },
-  "author": "weiji.li",
+  "author": "weiji.li @shopee",
   "contributors": [
     "weiji.li"
   ],
@@ -22,10 +22,7 @@
   "keywords": [
     "react",
     "hooks",
-    "useState",
-    "useCookie",
-    "useAction",
-    "usePrevious"
+    "useState"
   ],
   "peerDependencies": {
     "react": "*",
@@ -40,7 +37,7 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
     "@testing-library/react": "^8.0.1",
-    "@types/jest": "^24.0.25",
+    "@types/jest": "^24.0.13",
     "@types/react": "^16.8.19",
     "babel-jest": "^24.8.0",
     "browser-env": "^3.2.6",

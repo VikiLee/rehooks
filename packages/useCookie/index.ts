@@ -17,7 +17,7 @@ export function getCookie (name: string): string {
 export function setCookie (name: string, value: string | boolean | number, options?: CookieOption): void {
   options = options || {}
 
-  let str = name + '=' + encodeURIComponent(value) 
+  let str = name + '=' + encodeURIComponent(String(value)) 
     + `; path=${options.path ? options.path : '/'};`
     + `; domain=${options.domain ? options.domain : ''}`
   if (options.expires) {

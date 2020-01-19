@@ -8,7 +8,7 @@ import { useState } from '../useState'
  * @param initialState initial state
  * @returns {[State: any, Dispatch]} An array containing curent state and dispatch function
  */
-export const useAction = <T = any> (actions: {[actionName: string]: Function}, initialState: any) => {
+export const useAction = <T = any> (actions: {[actionName: string]: Function}, initialState: any): [T, DispatchAction, InjectAction] => {
   const [state, setState] = useState<T>(initialState)
   const currentState = useRef(state)
   const context = useRef({
@@ -36,9 +36,12 @@ export const useAction = <T = any> (actions: {[actionName: string]: Function}, i
   return [state, dispatch, inject]
 }
 
+export type DispatchAction  = (actionName: string, ...params: any[]) => void
+export type InjectAction = (contextProps: any) => void
+
 export interface ContextType {
   state: any;
   contextProps: any;
   commit: (state: any) => void;
-  dispatch: (actionName: string, ...params: any[]) => void
+  dispatch: DispatchAction
 }

@@ -1,0 +1,5 @@
+{
+  "inputFiles": ["./packages"],
+  "mode": "modules",
+  "out": "doc"
+}

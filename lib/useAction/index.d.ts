@@ -7,11 +7,13 @@
  */
 export declare const useAction: <T = any>(actions: {
     [actionName: string]: Function;
-}, initialState: any) => (T | ((actionName: string, ...params: any[]) => Promise<any>) | ((contextProps: any) => void))[];
+}, initialState: any) => [T, DispatchAction, InjectAction];
+export declare type DispatchAction = (actionName: string, ...params: any[]) => void;
+export declare type InjectAction = (contextProps: any) => void;
 export interface ContextType {
     state: any;
     contextProps: any;
     commit: (state: any) => void;
-    dispatch: (actionName: string, ...params: any[]) => void;
+    dispatch: DispatchAction;
 }
 //# sourceMappingURL=index.d.ts.map

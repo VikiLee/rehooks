@@ -1,6 +1,6 @@
 # `@mkt/rehooks`
 
-> 用于增强原生的react hook或者复用一些日常使用的hooks
+> 用于增强原生的react hook或者用于shopee mkt复用
 
 ## Install
 
@@ -100,7 +100,7 @@ export default (props: any) => (
 #### 说明
 ```jsx
 export default (props: any) => {
-    const [state, dispatch, inject] = useAction({
+    const [state, dispatch, inject] = useAction<StateType>({
         grow: ({ commit, state, contextProps, dispatch }: ContextType, age: number) => {
           // do stuff 
           // invoke commit to change state

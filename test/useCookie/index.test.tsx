@@ -1,6 +1,7 @@
 import React from 'react'
 import { useCookie, getCookie, setCookie } from '../../packages/useCookie'
 import { render, fireEvent, cleanup } from '@testing-library/react'
+import { idText } from 'typescript'
 
 afterEach(() => {
   cleanup()
@@ -9,7 +10,7 @@ afterEach(() => {
 describe('Integration Tests of useCookie', () => {
 
   const initialValue = 'hello word'
-  const newValue = 'hello China'
+  const newValue = 'hello shopee'
 
   it('Should get value from cookie when the key exists in cookie', () => {
     const key = 'foo'

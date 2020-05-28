@@ -131,6 +131,8 @@ export default (props: any) => {
 
 返回的第三个值是inject函数，其作用就是注入组件的props给action获取。
 
+返回的第四个值是setState函数，用于直接修改state。
+
 
 #### 例子
 ```jsx

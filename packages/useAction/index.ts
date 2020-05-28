@@ -1,4 +1,5 @@
 import { useCallback, useRef} from 'react'
+import { extend } from 'lodash'
 import { useState } from '../useState'
 
 /**
@@ -8,7 +9,7 @@ import { useState } from '../useState'
  * @param initialState initial state
  * @returns {[State: any, Dispatch]} An array containing curent state and dispatch function
  */
-export const useAction = <T = any> (actions: {[actionName: string]: Function}, initialState: any): [T, DispatchAction, InjectAction] => {
+export const useAction = <T = any> (actions: {[actionName: string]: Function}, initialState: any): [T, DispatchAction, InjectAction, (nextState: T | Partial<T>) => void] => {
   const [state, setState] = useState<T>(initialState)
   const currentState = useRef(state)
   const context = useRef({
@@ -33,10 +34,13 @@ export const useAction = <T = any> (actions: {[actionName: string]: Function}, i
     context.current.props = contextProps
   }, [])
 
-  return [state, dispatch, inject]
+  return [state, dispatch, inject, (newState: T | Partial<T>) => {
+    currentState.current = extend(state, newState)
+    setState(newState)
+  }]
 }
 
-export type DispatchAction  = (actionName: string, ...params: any[]) => void
+export type DispatchAction  = (actionName: string, ...params: any[]) => void | Promise<any>
 export type InjectAction = (contextProps: any) => void
 
 export interface ContextType {

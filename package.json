@@ -1,7 +1,7 @@
 {
-  "name": "@mkt/rehooks",
-  "version": "0.0.2-beta",
-  "description": "React hook shopee",
+  "name": "@viki/rehooks",
+  "version": "1.0.0-beta",
+  "description": "React custom hook",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -11,7 +11,7 @@
     "test": "jest --verbose",
     "example": "npm run build && parcel example/example.html"
   },
-  "author": "weiji.li @shopee",
+  "author": "weiji.li",
   "contributors": [
     "weiji.li"
   ],
@@ -42,6 +42,7 @@
     "babel-jest": "^24.8.0",
     "browser-env": "^3.2.6",
     "jest": "^24.8.0",
+    "jest-localstorage-mock": "^2.4.3",
     "parcel": "^1.12.3",
     "react-hooks-testing-library": "^0.5.1",
     "react-test-renderer": "^16.8.6",

@@ -7,8 +7,8 @@
  */
 export declare const useAction: <T = any>(actions: {
     [actionName: string]: Function;
-}, initialState: any) => [T, DispatchAction, InjectAction];
-export declare type DispatchAction = (actionName: string, ...params: any[]) => void;
+}, initialState: any) => [T, DispatchAction, InjectAction, (nextState: T | Partial<T>) => void];
+export declare type DispatchAction = (actionName: string, ...params: any[]) => void | Promise<any>;
 export declare type InjectAction = (contextProps: any) => void;
 export interface ContextType {
     state: any;

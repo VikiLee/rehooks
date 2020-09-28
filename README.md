@@ -1,22 +1,29 @@
-# `@mkt/rehooks`
+# `@viki/rehooks`
 
-> 用于增强原生的react hook或者用于shopee mkt复用
+> 用于增强原生的react hook或者新增hook
 
 ## Install
 
 ### With Yarn
 
 ```sh
-yarn add @mkt/rehooks
+yarn add @viki/rehooks
 ```
 
 ### With NPM
 
 ```sh
-npm i @mkt/rehooks
+npm i @viki/rehooks
 ```
 
 ## Usage
+
+## 目录
+- [useState](#useState)
+- [useAction](#useAction)
+- [usePrevious](#usePrevious)
+- [useCookie](#useCookie)
+- [useStorage](#useStorage)
 
 ### useState
 
@@ -49,7 +56,7 @@ setState({
 #### 例子
 ```jsx
 import React from 'react'
-import { useState } from '@mkt/rehooks'
+import { useState } from '@viki/rehooks'
 
 interface StateType {
     name: string;
@@ -129,15 +136,15 @@ export default (props: any) => {
 
 返回的第二个值为state的最新值。
 
-返回的第三个值是inject函数，其作用就是注入组件的props给action获取。
+返回的第三个值是inject函数，其作用就是注入组件的props给action获取。  
 
-返回的第四个值是setState函数，用于直接修改state。
+返回的第四个值是setState函数，用户可以直接调用该函数直接修改stats。
 
 
 #### 例子
 ```jsx
 import React from 'react'
-import { useAction, ContextType } from '@mkt/rehooks'
+import { useAction, ContextType } from '@viki/rehooks'
 export default (props: any) => {
   const initialValue = {
     name: 'weiji',
@@ -186,7 +193,7 @@ export default (props: any) => {
 ```jsx
 import React from 'react'
 
-import { useState, usePrevious } from '@mkt/rehooks'
+import { useState, usePrevious } from '@viki/rehooks'
 
 const Test = () => {
   
@@ -231,7 +238,7 @@ const [value, setValue, removeValue] = useCookie('key', initCookie)
 ```jsx
 import React from 'react'
 
-import { useCookie } from '@mkt/rehooks'
+import { useCookie } from '@viki/rehooks'
 
 const Test = () => {
   
@@ -243,6 +250,63 @@ const Test = () => {
 
   return (<div className="user">
       { username ? `hello ${username}` : <a onClick={() => login()}>please login</a>}
+    </div>
+  )
+}
+
+export default Test
+```
+
+### useStorage
+
+#### 作用
+hook版的localStorage。可以设置、获取和删除localStorage，并且可以监听storage的改变（同个tab不会监控到），storage的值修改页面会更新。不像useCookie，它可以设置复杂类型的值。  
+需要注意的是如果storage中存在对应key的值，那么调用useStorage的时候，取到的就是storage里面的值，而不是初始化的值，这个同useCookie。
+
+#### 说明
+**Parameters**    
+parameter | description | type | required
+---|--- | --- | ---
+key | localStorage的key | string | true
+initValue | 初始值 | T | true
+option | 配置 | {fireRender: boolean, onChange: (newValue: T) => void} | false
+
+option的两个属性:   
+fireRender: 是否在storage的值改变的时候重新渲染页面，默认为true  
+onChange: localStorage改变的时候，其他同源的tab可以监听到改变，本函数就是localStorage值改变的回调
+
+**return**  
+
+返回的数组第一个值是localStorage中对应key的值，如果本身localStorage中无对应的key的值存在，则会返回initValue的值。  
+
+返回数组的第二个值为SetStorageAction的函数，调用该函数，可以修改storage中的值。
+
+返回数组的第三个值是RemoveStorageAction的函数，调用该函数，可以删除key对应的值。  
+
+#### 例子
+
+```jsx
+import React from 'react'
+
+import { useStorage } from '@viki/rehooks'
+
+const Test = () => {
+  const [user, setUser, remove] = useStorage<{name: string, age: number}>('user', { name: 'xxx', age: 0 }, {
+    onChange(value) {
+      console.log('localStorage has changed')
+    }
+  })
+  const addAge = () => {
+    setUser({
+      age: user.age + 1
+    })
+  }
+  return (
+    <div className="user">
+      username: {user.name}<br/>
+      age: {user.age}
+      <div><button onClick={addAge}>add age</button></div>
+      <div><button onClick={remove}>remove</button></div>
     </div>
   )
 }

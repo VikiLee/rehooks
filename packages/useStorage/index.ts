@@ -34,11 +34,9 @@ interface Option<T> {
  * 注意： 如果不想在storage修改时改变ui，请设置option的fireRender为false
  */
 export function useStorage<T = string> (key: string, initialValue : T, option: Option<T> = {}) {
-  const [isInitialized, setInitialized] = useState<boolean>(false) // 删除storage后，需要标记为true，防止rerender又初始化写进storage
   // localStorage中没有值，初始值放入localstorage中
-  if (!isInitialized && initialValue !== undefined && !localStorage.getItem(prevKey + key)) {
+  if (initialValue !== undefined && !localStorage.getItem(prevKey + key)) {
     setItem(key, initialValue)
-    setInitialized(true)
   }
 
   const [val, setStorage] = useState(getItem(key))
@@ -62,10 +60,7 @@ export function useStorage<T = string> (key: string, initialValue : T, option: O
   }, [setStorage])
 
   const remove = () => {
-    localStorage.removeItem(prevKey + key)
-    if (option.fireRender === undefined || option.fireRender) {
-      setStorage(null)
-    }
+    setStorage(null)
   }
 
   useEffect(() => {
@@ -75,6 +70,12 @@ export function useStorage<T = string> (key: string, initialValue : T, option: O
     window.addEventListener('storage', handleChange)
     return () => window.removeEventListener('storage', handleChange)
   }, [])
+
+  useEffect(() => {
+    if (val === null) {
+      localStorage.removeItem(prevKey + key)
+    }
+  }, [val])
 
   return [val, set, remove]
 }

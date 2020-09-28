@@ -21,8 +21,7 @@
   },
   "keywords": [
     "react",
-    "hooks",
-    "useState"
+    "hooks"
   ],
   "peerDependencies": {
     "react": "*",
